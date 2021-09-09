@@ -14,4 +14,10 @@ def about(request):
 def list_page(request, pk):
     wishlist = get_object_or_404(WishList, pk=pk)
     print('[wishlist]', wishlist)
-    return render(request, 'wish_list.html', {'list': wishlist})
+    return render(request,
+                  'wish_list.html',
+                  {
+                    'wishlist': wishlist,
+                    'is_owner_list': wishlist.owner == request.user
+                  }
+                  )
